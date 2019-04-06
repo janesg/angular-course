@@ -1,0 +1,15 @@
+<!-- js object in side {} ... attributes can either be:
+        with dash and inside single quotes : 'background-color':
+        or
+        in camel-case with no quotes : backgroundColor:
+-->
+<p [ngStyle]="{'background-color': getColor(), 
+                fontWeight: getFontWeight()}"
+   [ngClass]="{online: serverStatus === 'online'}">
+    
+    <!-- String interpolation : anything between double curly brackets must resolve to a string -->
+    <!-- It cannot be multi-line, but could be a terniary expression -->
+    <!-- Number property (serverId) is automatically converted to a string -->
+    <!-- Note placing 'Server' between curly brackets is not required...just showing can be anything interpreted as string -->
+    {{ 'Server' }} with ID {{ serverId }} is {{ getServerStatus() }}
+</p>

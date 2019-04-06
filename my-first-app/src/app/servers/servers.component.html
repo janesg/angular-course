@@ -1,0 +1,41 @@
+<label>Server Name</label>
+<!-- Uses event binding ... denoted by round brackets -->
+<input type="text" class="form-control"
+       (input)="onUpdateServerName($event)">
+
+<!-- Uses 2 way binding ... square and round brackets combined -->
+<!-- Need this import in app module for ngModel to work : -->
+<!--     import { FormsModule } from '@angular/forms'; -->
+<input type="text" class="form-control"
+       [(ngModel)]="serverName">
+       
+<p>{{ serverName }}</p>
+       
+<button class="btn btn-primary" 
+        [disabled]="!allowNewServer"
+        (click)="onCreateServer()">Add Server</button>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col col-xs-12">
+            <!-- String interpolation -->
+            <span>{{ allowNewServer }}</span>
+            <span>{{ getAllowNewServer() }}</span>
+            <!-- ...or property binding -->
+            <span [innerText]="allowNewServer"></span>
+            <span [innerText]="getAllowNewServer()"></span>
+        </div>
+    </div>
+</div>
+<hr>
+<p>{{ serverCreationStatus }}</p>
+<!-- Use ngIf directive to conditionally add element to DOM -->
+<!-- * at beginning indicates Structural directive that changes DOM -->
+<p *ngIf="serverCreated">1) Server was created. Server name : {{ serverName }}</p>
+<p *ngIf="!serverCreated">No server was created. (from ngIf)</p>
+<p *ngIf="serverCreated; else noServer">2) Server was created. Server name : {{ serverName }}</p>
+<ng-template #noServer>No server was created. (from ng-template)</ng-template>
+
+<!-- Attribute directives don't add or remove elements. They just change the element they are placed on -->
+<hr>
+<app-server *ngFor="let svr of servers"></app-server>
